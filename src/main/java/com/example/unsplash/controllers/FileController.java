@@ -17,6 +17,9 @@ public class FileController {
         this.fileUploadService = fileUploadService;
     }
 
+
+    //key,value = file,data
+    @PostMapping
     public ResponseEntity<ResponseObject> uploadFile(@RequestBody MultipartFile file) {
         try {
             fileUploadService.storeFile(file);
@@ -31,7 +34,6 @@ public class FileController {
     }
 
     @GetMapping(value = "/images/{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
-    @ResponseBody
     public ResponseEntity<byte[]> getImage(@PathVariable("imageName") String imageName)  {
         try {
             byte[] data = fileUploadService.readFile(imageName);
